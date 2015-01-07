@@ -1,0 +1,15 @@
+*.bak
+*.aux
+*.log
+*.lot
+*.out
+*.toc
+*.blg
+*.bbl
+*.lof
+*.swp
+*.swo
+*.xdv
+*~
+*.fdb_latexmk
+diss.pdf
