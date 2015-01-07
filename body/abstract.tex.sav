@@ -1,0 +1,34 @@
+%%==================================================
+%% abstract.tex for SJTU Master Thesis
+%% based on CASthesis
+%% modified by wei.jianwen@gmail.com
+%% version: 0.3a
+%% Encoding: UTF-8
+%% last update: Dec 5th, 2010
+%%==================================================
+
+\begin{abstract}
+  随着云计算的飞速发展，越来越多的用户将敏感数据集中存放到云服务端，以避免繁琐的本地管理并获取更多便捷的服务。与此同时由于云服务提供商并非完全可信，如何保证云端数据的隐私—即如何避免云端数据被未经授权的人所访问已成为云计算环境下安全隐私问题的研究重点。为此，一些学者率先提出了“云计算环境下的可搜索加密技术”的研究课题。可搜索对称加密即用户将数据加密存储到服务端，同时服务端维持用户对加密数据进行有效搜索的能力。
+
+  本课题研究重点是：对称可搜索加密技术（可搜索加密技术主要包括：对称可搜索加密技术、公钥可搜索加密技术和隐私信息检索）中模糊对称可搜索加密和动态可搜索加密技术。文中首先分析了现有方案的研究状况；然后找出现有方案中存在的不足和被忽略的问题；最后通过解决原有方案中存在的潜在问题和扩充原有模糊方案的功能—支持语义搜索，提出一种更实用、更高效、功能更强大并且没有降低安全性能的新方案，使之尽可能支持动态和模糊功能并且没有增加信息泄露。
+
+
+  \keywords{\large 可搜索加密 \quad 同义词搜索 \quad 相似搜索 \quad 搜索模式 }
+\end{abstract}
+
+\begin{englishabstract}
+
+An imperial edict issued in 1896 by Emperor Guangxu, established Nanyang Public School in Shanghai. The normal school, school of foreign studies, middle school and a high school were established. Sheng Xuanhuai, the person responsible for proposing the idea to the emperor, became the first president and is regarded as the founder of the university.
+
+During the 1930s, the university gained a reputation of nurturing top engineers. After the foundation of People's Republic, some faculties were transferred to other universities. A significant amount of its faculty were sent in 1956, by the national government, to Xi'an to help build up Xi'an Jiao Tong University in western China. Afterwards, the school was officially renamed Shanghai Jiao Tong University.
+
+Since the reform and opening up policy in China, SJTU has taken the lead in management reform of institutions for higher education, regaining its vigor and vitality with an unprecedented momentum of growth. SJTU includes five beautiful campuses, Xuhui, Minhang, Luwan Qibao, and Fahua, taking up an area of about 3,225,833 m2. A number of disciplines have been advancing towards the top echelon internationally, and a batch of burgeoning branches of learning have taken an important position domestically.
+
+Today SJTU has 31 schools (departments), 63 undergraduate programs, 250 masters-degree programs, 203 Ph.D. programs, 28 post-doctorate programs, and 11 state key laboratories and national engineering research centers.
+
+SJTU boasts a large number of famous scientists and professors, including 35 academics of the Academy of Sciences and Academy of Engineering, 95 accredited professors and chair professors of the "Cheung Kong Scholars Program" and more than 2,000 professors and associate professors.
+
+Its total enrollment of students amounts to 35,929, of which 1,564 are international students. There are 16,802 undergraduates, and 17,563 masters and Ph.D. candidates. After more than a century of operation, Jiao Tong University has inherited the old tradition of "high starting points, solid foundation, strict requirements and extensive practice." Students from SJTU have won top prizes in various competitions, including ACM International Collegiate Programming Contest, International Mathematical Contest in Modeling and Electronics Design Contests. Famous alumni include Jiang Zemin, Lu Dingyi, Ding Guangen, Wang Daohan, Qian Xuesen, Wu Wenjun, Zou Taofen, Mao Yisheng, Cai Er, Huang Yanpei, Shao Lizi, Wang An and many more. More than 200 of the academics of the Chinese Academy of Sciences and Chinese Academy of Engineering are alumni of Jiao Tong University.
+
+  \englishkeywords{\large SJTU, master thesis, XeTeX/LaTeX template}
+\end{englishabstract}

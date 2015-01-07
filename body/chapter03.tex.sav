@@ -1,0 +1,428 @@
+%%==================================================
+%% chapter03.tex for SJTU Master Thesis
+%% Encoding: UTF-8
+%%==================================================
+
+\chapter{抗信息泄露的可搜索加密方案}
+\label{chap:searchpattern}
+
+到目前为止，可搜索加密方案大多从功能、性能进行扩展和优化，方案的安全性证明都是以curtmola方案中trace信息泄漏作为基本前提。至今仍没有一个完整的解决方案从实际上能抵御trace信息泄漏或以一种新的与trace对等的形式来衡量信息泄漏。为此，从方案的安全性考虑，必须提供一种能解决或者尽量减少trace信息泄漏的办法。%Liu\cite{liu2014search}等人虽然证明信息泄漏带来的问题，并使用一种简单的形式来描述如何避免trace的泄漏，但是因通讯和计算开销的增加太大而不能被实际使用。
+
+在这本章中，基于semi-trusted的云环境下，我们提出了一个以小概率来泄漏可搜索加密环境中trace信息泄漏的方案。首先，我们通过对文档进行预处理，从而避免了size pattern的信息泄漏；然后我们以向量空间的知识对单词进行精心设计降低了search pattern的泄漏；通过对文档和单词的处理工作同时也减少了access pattern的泄漏问题；另外，我们方案中客户的计算和通讯开销的量级保持不变；最后，我们证明我们的方案中的信息泄漏比之前方案所泄漏的信息量小。但是，我们的方案显然增加了服务器的存储大小。
+
+
+\section{问题定义}
+\label{sec:searchpattern_problem_definition}
+
+在对称可搜索加密环境下，一个通用的系统模型如下图\ref{fig:general_system_model}所示：
+\begin{figure}[!htp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{chap3/general_system_model}
+  \bicaption[fig:general_system_model]{这里将出现在插图索引中}{SSE上通用系统模型}{Fig}{A General System Model in SSE}
+\end{figure}
+
+从上图\ref{fig:general_system_model}可知，通常数据所有者上传带外包的文档并维护数据的高效检索的能力，并非完全可信的服务器提供各种条件的数据检索并返回答案，而用户经所需求的搜索陷门发送给服务器并接收其响应和进行解密。在通用模型下，我们分别对搜索模式和访问模式进行分析，了解当前方案中的信息泄漏问题的原因。
+
+\subsection{搜索模式泄漏}
+\label{sec:searchpattern_problem_definition_search_pattern}
+搜索模式是一个二维矩阵，其信息透露了该轮搜索的单词是否在之前已被搜索过。从图\ref{fig:general_system_model}我们可以了解到，搜索模式的泄漏主要来源于陷门生成函数使用的是确定性的算法。如果我们查询的单词序列是（$w_1, w_2, w_1, w_1, w_1$），则我们请求的搜索陷门分别为（$T_{w_1}, T_{w_2}, T_{w_1}, T_{w_1}, T_{w_1}$），这样敌手可以通过统计信息分析并结合英文单词的频率推断出所查找的单词。另外，即使我们在搜索时的陷门没有透露，但是在建立索引时，若安全索引结构中每个单词的在查找表中的内容也是基于确定性的算法，则同样地敌手能通过在查找时，以在查找表中匹配的结果来分析和推断出用户的搜索模式。因而，使用确定性的算法建立陷门必然会导致搜索模式的信息泄漏，我们必须设计一种新的算法来避免或以概率揭露用户的搜索模式给敌手的难点。在文章\cite{liu2014search}中，Chang. 等人证明了通用模型中的搜索模式信息泄漏的问题以及带来的缺陷，并提出一种利用数据冗余的方法来避免搜索模式的信息泄漏的方案。不幸的是，由于方案中引入的通讯开销过大（一般返回的结果的通讯量是所需答案信息量的m 倍，m 是附加的无用的单词数目）而不能被实际所采用。一个典型的搜索模式信息泄漏的情况如表\ref{tab3-1}所示：
+ \begin{table}[h]
+  \centering
+  \bicaption[tab3-1]{搜索模式信息泄漏示例}{搜索模式信息泄漏示例}
+  {Table}{An Example Of Search Pattern Information Leakage}
+  \begin{tabular}[t]{|c|c|}
+  \hline
+    文档 &       单词 \\
+    \hline
+    $w_1$ & $T(w_1)$ \\
+    \hline
+    $w_2$ & $T(w_2)$ \\
+    \hline
+    $w_3$ & $T(w_3)$ \\
+    \hline
+    $w_4$ & $T(w_4)$  \\
+    \hline
+  \end{tabular}
+  \end{table}
+
+  从上表可知，对于每个单词而言，他们所产生的陷门信息是确定的，即对同一单词必产生相同的输出陷门。为此，我们必须设计一个对某一个单词，其输出陷门是概率性确定的算法，在下面方案中，我们通过引入史密斯正交化理论来设计概率的单词陷门生成函数。
+
+
+
+\subsection{访问模式泄漏}
+\label{sec:searchpattern_problem_definition_access_pattern}
+
+q次查询历史的访问模式指q次查找所得到的结果的集合，即通过待查单词，敌手可以得到的满足条件的文档结果集。如对5次查询的历史信息，我们能得到其对应的加密文档结果集，如图\ref{tab3-2} 所示：\\
+\begin{table}[h]
+  \centering
+  \bicaption[tab3-2]{访问模式信息泄漏示例}{访问模式信息泄漏示例}
+  {Table}{An Example Of Access Pattern Information Leakage}
+  \begin{tabular}[t]{|c|c|}
+  \hline
+    单词陷门 &       查找结果 \\
+    \hline
+    $T(w_1)$ & $c_1, c_3, c_4$ \\
+    \hline
+    $T(w_2)$ & $c_2, c_3, c_5$ \\
+    \hline
+    $T(w_3)$ & $c_1, c_2, c_5$ \\
+    \hline
+    $T(w_2)$ & $c_2, c_3, c_5$  \\
+    \hline
+    $T(w_1)$ & $c_1, c_3, c_4$  \\
+    \hline
+  \end{tabular}
+  \end{table}
+  从表\ref{tab3-2}中，对每一个单词，我们所对应的文档的结果集是确定的。当服务器搜索时，如果服务器发现该次查询在以前某次被查询过，服务器可以直接返回以前查询所记录的结果，而不管上次查询之后文档是否发生变化，这显然破环的方案的完整性。并且，如果访问模式没有被隐藏，即使搜索模式被隐藏了，我们同样可以通过访问模式来推导出搜索模式的信息。因为，仅仅隐藏搜索模式是不够的，同时必须一定程度上的隐藏访问模式。在这个方案中，我们通过以概率条件来泄漏方案的访问模式，但是同时在方案中，我们带来了一定存储开销的提升。
+
+
+从上述分析中，我们可以了解到，为了完全隐藏方案中的trace信息，我们构造的方案必须具有以下特征：
+\begin{enumerate}
+  \item
+  对于同一个单词，其对应的搜索陷门每次产生应该完全不相同，即敌手不能通过搜索陷门来推断出用户的搜索模式；
+
+  \item
+  对于不同的单词，其对应的搜索陷门应该存在相同，即敌手不能通过输出的结果来推断用户的访问模式。
+
+  \item
+  对于所有的文档的密文，它们的长度必须相等，以至于服务器在查询时不能通过长度来推断出某些信息。
+\end{enumerate}
+实际中，我们不可能完全掩盖trace的信息，因而我们只能尽可能地减少其信息的泄漏，即以条件概率来泄漏trace的信息量。
+
+
+
+%%\section{系统模型}
+%%\label{sec:searchpattern_model}
+
+\section{方案框架}
+\label{sec:searchpattern_algo}
+
+在不可信的云环境下，我们实现了一个抗信息泄漏的可搜索加密方案。该方案主要包括数据拥有者、被授权用户和云服务提供商\ref{fig:general_system_model}。数据拥有者负责数据的初始化和建立安全索引，而云服务提供商负责存储外包文档和遵照用户提交的陷门请求对外包数据进行检索并返回结果。该方案主要包括五部分：
+\begin{itemize}
+  \item \textbf{密钥生成：}数据所有者根据安全参数，生成解密文档和建立索引所需要的密钥。
+  \item \textbf{文档加密：}数据拥有者对待上传的文档进行分块，并使之连接起来，对每篇文档生成一个链表，同时我们能通过链表的起始块逐块遍历恢复出完整的完成。
+  \item \textbf{安全索引建立：}数据所有者根据待上传的文档，提取关键字的信息，建立安全索引，并维护安全索引与加密文档之间的关系。
+  \item \textbf{陷门生成：}当在数据拥有者所属范围内的用户想要查找某单词所包含的文档时，用户通过安全陷门生成函数计算单词的陷门
+  \item \textbf{搜索：}一旦云服务提供商收到用户所提交的待查找单词陷门时，云服务提供商通过单词陷门在安全索引上检索，并通过文档ID查找到对应的文档，最终将查找到的答案会送给用户。
+  \item \textbf{解密：}用户对搜索所得到的加密文档进行解密，并将文档片段组成完整的文档并抛弃不需要的文档。
+\end{itemize}
+
+\section{方案细节}
+\label{sec:searchpattern_scheme}
+
+\subsection{前人的工作}
+\label{sec:searchpattern_scheme_related_work}
+在Liu\cite{liu2014search}等人的方案中，他们首先证明了在通用的单关键字的可搜索加密场景下，敌手在有少量额外信息的条件和搜索模式信息泄漏的条件下，能发现用户搜索潜在的关键字。然后针对该问题，他们提出了一种基础分组的方案来隐藏搜索模式的信息泄漏，并且他们通过实验证明他们的方案能避免搜索模式的信息泄漏。
+他们在方案中首先指出了若存在在搜索模式泄漏的情况下，敌手可以通过少量的信息来推断出用户以后待查找单词的潜在可能性，即以很大概率猜测出用户真实的查找单词的明文信息。
+
+
+\subsection{方案相关定义}
+\label{sec:searchpattern_scheme_related_definition}
+
+在我们的方案中，为了避免Trace的信息泄漏，我们使用基于向量空间的史密斯正交化原理来避免搜索模式的信息泄漏。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{defn}[标量函数]
+\label{defn:scale_function}
+定义函数$\phi$是将两个n维向量空间映射到一个标量的过程，即：
+\begin{center}
+$\phi$ : $x$ $\ast$ $y$ $\rightarrow$ $\sum_{i=1}^{n}(x_i y_i)$ \ \ ($x = (x_1, ..., x_n), y = (y_1, ..., y_n)$, $x_i, y_i$ $\leftarrow$ $\{0,1\}^{n}$ )
+\end{center}
+\end{defn}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thm}[Gram-Schmidt]
+\label{thm:gram_schmidt}
+如果$(f_i)_{i\in\{0,n\}}$是一个pre-Hilbert向量空间系，则必存在一个正交系$(o_i)_{i\in\{0, l\}}$ 使：
+\begin{itemize}
+  \item $\phi(o_i, o_j) = \phi(o_i, o_i)\delta_{i,j}$，
+  \item $Vect(f_1,..., f_l) = Vect(o_1, ...o_l)$，
+  \item 标量积$\phi(f_i,o_i)$严格为正。
+\end{itemize}
+\end{thm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{defn}[向量映射]
+\label{defn:scale_function}
+向量空间$v$在向量空间$u$上的映射$p$，定义为：
+\begin{center}
+$p_u(v) = \frac{\phi(u,v)}{\phi(u,u)} u$
+\end{center}
+\end{defn}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{defn}[抗Trace泄漏的可搜索加密方案]
+\label{defn:resist_trace}
+该方案主要有五部分组成：（KeyGen，Enc，Trapdr，Query，Dec）；
+\begin{itemize}
+  \item \textbf{KeyGen.}\ 在方案中，密钥生成函数$KeyGen(1_k) \rightarrow K$主要被授权用户调用,用于生成方案加密和索引建立所需要的密钥。
+  \item \textbf{Enc.}\ 加密函数主要是提取带外包的数据，对数据进行索引建立和对文档进行加密，然后将两者外包给云服务提供商。
+  \item \textbf{Trapdr.}\ 安全的陷门生成函数主要由授权的用户所调用，用于生成查询陷门，并且在方案中，对同一单词每次生成的陷门不完全一样，即是一个概率算法，以一定的概率来生成该单词陷门。
+  \item \textbf{Query.}\ 查询过程，包括通过单词陷门对安全索引进行查找和通过文档ID对文档进行查找。
+  \item \textbf{Dec.}\ 解密过程，主要由查询者执行，查询者根据所查找到的信心来对文档数据块进行组合，形成查询所需要的正确结果。
+\end{itemize}
+\end{defn}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+方案中包括五部分，这里我们没有对KeyGen进行描述，KeyGen仅仅是一个密钥生成生成算法，与其它方案中所用到的完全一样。在其它章节我们将对其它四个模块进行详细的描述。
+
+\subsection{加密}
+\label{sec:searchpattern_scheme_encryption}
+
+数据所有者调用密钥生成函数$KeyGen$生成密钥$K = ()$；然后分别对文档进行加密和建立安全索引。
+
+\textbf{文档加密} 首先对所有文档$D=(D_i, ..., D_n)$进行填充，使每个文档具有相同的大小。然后对每个文档$D_i$划分成m个大小相同的块${B_1, ..., B_m}$，在每块的后面加一个代表块所在文件中位置的标记，加上标记后的文件块为：$（B_1||1, ..., B_m||m）$；紧接着将标记后的文件块复制q份，然后对每份分别用加密函数$SKE.Enc$和密钥$SK_i$ 进行加密，加密后放入数组$A_d$中，并将每块用一个链连接起来，每个数据块在数组$A_d$ 结点中的信息如下：
+\begin{center}
+$A_d[N_i] = <SKE.Enc_{SK_i}(B_i||i), addr_{D}(N_{i+1})>$
+\end{center}
+对每个文档分块并加密建立关联后的结构如图\ref{fig:file_block_list}所示：
+\begin{figure}[!htp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{chap3/file_list}
+
+  \bicaption[fig:file_block_list]{加密后文档块链表}{加密后文档块链表} {Fig}{Document Block List of Encryption}
+\end{figure}
+
+
+\textbf{索引建立} 首先对所有文档$D$，提取出文档中所有不同的单词集合$W(D) = \{w_1, ..., w_|W(D)|\}$，然后对每个单词$w_i \in W(D)$使用伪随机置换函数 $\pi_{K_1}$生成一个置换后的单词集合$PW = (\pi_{K_1}(w_1), ..., \pi_{K_1}(w_{|W(D)|})$。
+随后我们选取$|W(D)|$个$l-2$维的标准化正交基$\{e_1, ..., e_{|W(D)|}\}$ （对于$i \in [1, |W(D)|]$，$|e_i| = l-2$）（该正交基的建立过程可以使用史密斯正交化理论构建
+\ref{daniel1976reorthogonalization}），然后将每个置换后的单词和正交基连接起来，则每个单词的结构如下：$\pi_{K_1}(w_i) || e_i$，且每个结构的大小为$l-1$ 维，然后将数组$\{1,q\}$ 中每个数与连接后的单词结构相连接，则对每个单词$w_i$形成q个$l$维的空间向量，对$1 \leq i \leq |W(D)|$ 和$1 \leq j \leq q$，其结构为$f_{w_i,j} = （\pi_{K_1}(w_i) || e_i || j）$。
+对每个结构$f_{w_i,j}$，我们使用伪随机函数$F_{K_2}$生成一个随机后的结果放入查找表（look-up）T中，对T 中每个结点存储的信息如下：
+\begin{center}
+$T[F_{K_2}(f_{w_i,j})] = <f_{w_i,j}, addr_{ID}(ID(w_i)[1])> \oplus \mathcal{G}(P_{K_3}(f_{w_i,j}))$，
+\end{center}
+这里$P_{K_3}$是伪随机函数，$\mathcal{G}_K$是随机生成器，$addr_{ID}(ID(w_i)[1])$是指单词$w_i$的文档ID集合的在文档ID数组$A$中的第一个文档ID所对应的地址。
+
+对每个单词$w_i$所属文档ID的集合$ID(w_i) = \{ID(D_i) | w_i \in D_i \}$，建立对应的链表$L_{w_i}$，对在$ID(w_i)$中每个ID（$1 \leq j \leq |ID(w_i)|$）在数组$A_s$中的结构如下：
+\begin{center}
+$A[N_{ID(w_i),j}] = (<ID(w_i)[j], addr_{ID}(ID(w_i)[j+1])> \oplus H(Q_{K_4}(f_{w_i,j}),r_i), r_i)$，
+\end{center}
+
+安全索引构造后的结构如下图\ref{fig:resist_secure_index}所示：
+
+\begin{figure}[!htp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{chap3/secure_index}
+
+  \bicaption[fig:resist_secure_index]{图}{安全索引} {Fig}{Secure Index}
+\end{figure}
+
+数据拥有者在加密过程中主要使用了三个函数：文档加密函数$EncD$ \ref{alg:EncD} 和安全索引建立函数$BuildLookup$ \ref{alg:BuildLookup}与$BuildArray$ \ref{alg:BuildArray}，其具体实现过程分别如下：
+
+\begin{algorithm}[htb]
+\caption{$A_d \leftarrow EncD(K, D)$}
+
+% algorithm label to be referred in the text
+\label{alg:EncD}
+\begin{algorithmic} [1]
+
+\ENSURE ~~\\
+  \COMMENT{ \textbf{Initialization}} ~~\\
+         allocate enough array: $A_d$ ~~\\
+         make each $|D_i|$ equal by filling ~~\\
+  \COMMENT{ \textbf{Build List for $D$}} ~~\\
+  \STATE divide each $D$ into m blocks：$B$ =（$B_1||1, ..., B_m||m$）; ~~\\
+         make $p$ copies of $B$
+         \FOR {$1 \leq j \leq p$}
+           \FOR { $B_i \in B$}
+              \STATE create a node: $A_d[B_i] = < SKE.Enc_{SK_j}(B_i), addr_D(B_{i+1}) >$,
+                     where $addr_d(B_i)$ is randomly unique address. ~~\\
+                     for the last block, $addr_D(B_m) = NULL$ ~~\\
+           \ENDFOR
+         \ENDFOR
+  %
+  % RETURN VALUE OF THE ALGORITHMS
+  %
+  \RETURN ${A_d}$;
+
+\end{algorithmic}
+\end{algorithm}
+
+
+\begin{algorithm}[htb]
+\caption{$T \leftarrow BuildLookup(D,K)$}
+% algorithm label to be referred in the text
+\label{alg:BuildLookup}
+\begin{algorithmic} [1]
+
+\ENSURE ~~\\
+  \COMMENT{ \textbf{Initialization}} ~~\\
+  \STATE allocate enough look-up table $T$ ~~\\
+         select orthogonal basis $\{e_1, ..., e_{|W(D)|} \}$ of $l-2$ dimensions ~~\\
+         randomly select constant $q$ ~~\\
+  \COMMENT{ \textbf{Build Look-up Table $T$}} ~~\\
+         \FOR {$w_i \in W(D)$}
+           \STATE generate: $t(w_i) = \pi_{K_1}(w_i) || e_i$, $|t(w)| = l-1$
+           \FOR {$1 \leq j \leq q$}
+             \STATE get: $f_{w_i,j} = t(w_i) || j$ ~~\\
+                    create a node:
+                    $T[f_{w_i,j}] = <f_{w_i,j}, addr_{ID}(ID(w_i)[1])> \oplus \mathcal{G}(P_{K_3}(f_{w_i,j}))$
+
+             \STATE fill remaining blanks to random value
+           \ENDFOR
+         \ENDFOR
+  %
+  % RETURN VALUE OF THE ALGORITHMS
+  %
+  \RETURN ${T}$;
+
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[htb]
+\caption{$A \leftarrow BuildArray(D,K)$}
+% algorithm label to be referred in the text
+\label{alg:BuildArray}
+\begin{algorithmic} [1]
+
+\ENSURE ~~\\
+  \COMMENT{ \textbf{Initialization}} ~~\\
+  \STATE get $ID(w_i)$ of $w_i \in W(D)$ ~~\\
+         assure all $|ID(w_i)|$ equal ~~\\
+         allocate enough array $A$ ~~\\
+  \COMMENT{ \textbf{Build Array $A$}} ~~\\
+         \FOR {$w_i \in W(D)$}
+           \FOR {$1 \leq j \leq |ID(w_i)$}
+             \STATE create a node in $A$:
+                    $A[ID(w_i)[j]] = <ID(w_i)[j], addr_{ID}(ID(w_i)[j+1])> \oplus \mathcal{H}(Q_{K_4}(f_{w_i,j},r_i), r_i)$ ~~\\
+                    and for last node: $addr_{ID}(ID(w_i)[|ID(w_i)|]) = NULL$
+           \ENDFOR
+         \ENDFOR
+         \STATE fill remaining entries in $A$ to random value
+  %
+  % RETURN VALUE OF THE ALGORITHMS
+  %
+  \RETURN ${A}$;
+
+\end{algorithmic}
+\end{algorithm}
+
+
+\subsection{陷门生成}
+\label{sec:searchpattern_trapdoor_generator}
+
+当授权的用户查询单词$w$时，首先执行函数$BuildSI$得到该单词对应的$l-1$维的向量$t(w)$，然后从集合$\{1,q\}$中随机选取一个数$N$，并将两者连接起来形成一个$l$维的向量$f_{w,N} = (t(w)||N)$；对向量$f_{w,N}$，构建其$l$维的法平面方程M \ref{schwarzenberger1961vector}，满足：
+%\begin{center}
+$M(x_1, x_2, ..., x_l) = 0$ （$x_i$为第$i$维空间的标量值），
+%\end{center}
+在法平面M上，我们随机选择一个与$f_(w,N)$垂直的向量$V_{f_{w,N}}$，计算其陷门$T_w$，包括：$T_w = (F_{K_2}(f_{w,N}, P_{K_3}(f_{w,N}), Q_{K_4}(f_{w,N}), V_{f{w,N}} )$，然后将陷门提交给云服务端进行搜索。具体的算法 \ref{alg:GenTrpdr}描述如下：
+
+\begin{algorithm}[htb]
+\caption{$T_w \leftarrow GenTrpdr(w,K)$}
+% algorithm label to be referred in the text
+\label{alg:GenTrpdr}
+\begin{algorithmic} [1]
+
+\ENSURE ~~\\
+  \COMMENT{ \textbf{Initialization}} ~~\\
+  \STATE randomly select number $N$ from set $[1,q]$ ~~\\
+         get $e_i$ following algorithm $BuildSI$ ~~\\
+
+         \COMMENT{ \textbf{Build Array $A$}} ~~\\
+         \FOR {$w_i \in W(D)$}
+           \FOR {$1 \leq j \leq |ID(w_i)$}
+             \STATE create a node in $A$:
+                    $A[ID(w_i)[j]] = <ID(w_i)[j], addr_{ID}(ID(w_i)[j+1])> \oplus \mathcal{H}(Q_{K_4}(f_{w_i,j},r_i), r_i)$ ~~\\
+                    and for last node: $addr_{ID}(ID(w_i)[|ID(w_i)|]) = NULL$
+           \ENDFOR
+         \ENDFOR
+         \STATE fill remaining entries in $A$ to random value
+  %
+  % RETURN VALUE OF THE ALGORITHMS
+  %
+  \RETURN ${A}$;
+\end{algorithmic}
+\end{algorithm}
+
+
+
+\subsection{查询}
+\label{sec:searchpattern_scheme_search}
+所有带外包数据，都已经通过加密建立安全结构存储在云服务器上。当授权用户将请求陷门发送给云服务者后，一旦收到，云服务器将对进行查询并返回结果给请求者，过程如下：
+\begin{enumerate}
+  \item 搜索查找表$T$：解析陷门$T_w$，在look-up中查找获得文档ID入口地址；
+
+  \item 查找数组$A$：通过文档ID首地址得到所有文档数据块的首地址；
+  
+  \item 查找数组$A_d$：逐个对每个文档数据块的首地址遍历，最终得到所有的文档数据块集合；
+  \item 返回：将查找得到的所有结果返回给请求者。
+\end{enumerate}
+算法\ref{alg:search}使用伪代码描述了Search的具体实现。
+
+\begin{algorithm}[htb]
+\caption{$ED \leftarrow Search(T_w, I, A_d)$}
+% algorithm label to be referred in the text
+\label{alg:search}
+\begin{algorithmic} [1]
+\ENSURE ~~\\
+  \COMMENT{ \textbf{Visit Look-up Table $T$}} ~~\\
+  \STATE parse $T_w$ as: $T_w = (t_1, t_2, t_3, t_4)$ ~~\\
+         set: $T[t_1] \oplus \mathcal{G}(t_2) = (a_1, a_2)$ ~~\\
+  \COMMENT{ \textbf{Visit Array $A$} } ~~\\
+  \IF {$a_1 . t_4 == 0$}
+    \STATE init set: $ID = \varnothing $
+    \STATE get: $(id, a_2) = A[a_2][1] \oplus \mathcal{H}(t_3,a[a_2][2]))$
+    \STATE put $id$ into set $ID$
+    \IF {$a_2 \neq NULL$}
+      \STATE goto: 4
+    \ENDIF
+    \STATE init set: $ED = \varnothing$ ~~\\
+    \COMMENT{ \textbf{Visit Array $A_d$} } ~~\\
+    \FOR {$1 \leq k \leq |ID|$}
+      \STATE get blocks: $BS$ by traversing $ID[k]$ in $A_d$
+      \STATE put $BS$ into $ED$
+    \ENDFOR
+  \ELSE
+    \STATE exit;
+  \ENDIF
+
+  \RETURN ${ED}$;
+\end{algorithmic}
+\end{algorithm}
+
+
+
+\subsection{解密}
+\label{sec:searchpattern_scheme_decryption}
+
+若授权用户收到远程服务器回送的响应结果$ED$后，对其进行解密，并逐步将各个数据块连接起来丢弃无用的数据块，形成完整的文档，即用户所需求的结果$Ans$。解密算法$Dec$ \ref{alg:decED}描述如下：
+\begin{algorithm}[htb]
+\caption{$Ans \leftarrow Dec(K, ED)$}
+\label{alg:decED}
+\begin{algorithmic} [1]
+\ENSURE ~~\\
+  \STATE init: $Ans = \varnothing $ ~~\\
+  \COMMENT{ \textbf{Analyze each set in $ED$}} ~~\\
+  \FOR {$1 \leq i \leq |ED| $}
+    \STATE get corresponding $SK_N$ of $f_{w,N}$
+    \FOR {$1 \leq j \leq |ED[i]|$}
+      \STATE decrypt: $ b_j = SKE.Dec_{SK_N}(ED[i][j])$
+    \ENDFOR
+    \STATE sort: $p_1, p_2, p_m$ in actual block sort
+    \STATE get document: $D_j = p_j[1]||p_2[1]||...||p_m[1]$
+    \STATE throw dummy strings of $D_j$, put $D_j$ to $Ans$
+  \ENDFOR
+  \RETURN ${Ans}$;
+\end{algorithmic}
+\end{algorithm}
+
+
+
+
+
+
+\section{安全性证明}
+\label{sec:searchpattern_security}
+
+
+
+\section{性能分析}
+\label{sec:searchpattern_capability}
+
+
+\section{应用}
+\label{sec:searchpattern_application}

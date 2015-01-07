@@ -1,0 +1,518 @@
+% DO NOT DELETE This File!!!
+
+% encoding: GBK
+
+% !Mode:: "TeX:UTF-8"
+
+@article{walker2008benchmarking,
+  title={Benchmarking Amazon EC2 for high-performance scientific computing},
+  author={Walker, Edward},
+  journal={Usenix Login},
+  volume={33},
+  number={5},
+  pages={18--23},
+  year={2008}
+}
+
+
+@article{bogatin2006google,
+  title={Google CEO's new paradigm:'cloud computing and advertising go hand-in-hand'},
+  author={Bogatin, Donna},
+  journal={ZDNet.[Online]. Available: http://blogs. zdnet. com/micromarkets},
+  year={2006}
+}
+
+@article{above2009Armb,
+  title={Above the clouds: A Berkeley view of cloud computing},
+  author={Fox, Armando and Griffith, Rean and Katz, R},
+  journal={Dept. Electrical Eng. and Comput. Sciences},
+  volume={28},
+  pages={13},
+  year={2009}
+}
+
+@article{chiueh2005survey,
+  title={A survey on virtualization technologies},
+  author={Chiueh, Susanta Nanda Tzi-cker and Brook, Stony},
+  journal={RPE Report},
+  pages={1--42},
+  year={2005}
+}
+
+
+@article{ristenpart2009hey,
+  title={Hey, you, get off of my cloud: exploring information leakage in third-party compute clouds},
+  author={Ristenpart, Thomas and Tromer, Eran and Shacham, Hovav and Savage, Stefan},
+  booktitle={Proceedings of the 16th ACM conference on Computer and communications security},
+  pages={199--212},
+  year={2009}
+}
+
+@book{biham1993differential,
+  title={Differential cryptanalysis of the data encryption standard},
+  author={Biham, Eli and Shamir, Adi},
+  volume={28},
+  year={1993}
+}
+
+
+@book{grefenstette1994explorations,
+  title={Explorations in automatic thesaurus discovery},
+  author={Grefenstette, Gregory},
+  year={1994}
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%   研究现状与相关问题
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@article{song2000practical,
+  title={Practical techniques for searches on encrypted data},
+  author={Song, Dawn Xiaoding and Wagner, David and Perrig, Adrian},
+  booktitle={Security and Privacy, 2000. S\&P 2000. Proceedings. 2000 IEEE Symposium on},
+  pages={44--55},
+  year={2000}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Boolean Search
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@article{golle2004secure,
+  title={Secure conjunctive keyword search over encrypted data},
+  author={Golle, Philippe and Staddon, Jessica and Waters, Brent},
+  booktitle={Applied Cryptography and Network Security},
+  pages={31--45},
+  year={2004}
+}
+
+@article{ballard2005achieving,
+  title={Achieving efficient conjunctive keyword searches over encrypted data},
+  author={Ballard, Lucas and Kamara, Seny and Monrose, Fabian},
+  booktitle={Information and Communications Security},
+  pages={414--426},
+  year={2005}
+}
+
+@article{shamir1979share,
+  title={How to share a secret},
+  author={Shamir, Adi},
+  journal={Communications of the ACM},
+  volume={22},
+  number={11},
+  pages={612--613},
+  year={1979}
+}
+
+@article{mell2009nist,
+  title={The NIST definition of cloud computing},
+  author={Mell, Peter and Grance, Tim},
+  journal={National Institute of Standards and Technology},
+  volume={53},
+  number={6},
+  pages={50},
+  year={2009}
+}
+
+
+@article{moataz2013boolean,
+  title={Boolean symmetric searchable encryption},
+  author={Moataz, Tarik and Shikfa, Abdullatif},
+  booktitle={Proceedings of the 8th ACM SIGSAC symposium on Information, computer and communications security},
+  pages={265--276},
+  year={2013}
+}
+
+
+@article{indyk1998approximate,
+  title={Approximate nearest neighbors: towards removing the curse of dimensionality},
+  author={Indyk, Piotr and Motwani, Rajeev},
+  booktitle={Proceedings of the thirtieth annual ACM symposium on Theory of computing},
+  pages={604--613},
+  year={1998}
+}
+
+@article{kuzu2012efficient,
+  title={Efficient similarity search over encrypted data},
+  author={Kuzu, Mehmet and Islam, Mohammad Saiful and Kantarcioglu, Murat},
+  booktitle={Data Engineering (ICDE), 2012 IEEE 28th International Conference on},
+  pages={1156--1167},
+  year={2012}
+}
+
+@article{chuah2011privacy,
+  title={Privacy-aware bedtree based solution for fuzzy multi-keyword search over encrypted data},
+  author={Chuah, M and Hu, W},
+  booktitle={Distributed Computing Systems Workshops (ICDCSW), 2011 31st International Conference on},
+  pages={273--281},
+  year={2011}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%   伪随机函数
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@article{bellare1996pseudorandom,
+  title={Pseudorandom functions revisited: The cascade construction and its concrete security},
+  author={Bellare, Mihir and Canetti, Ran and Krawczyk, Hugo},
+  booktitle={Foundations of Computer Science, 1996. Proceedings., 37th Annual Symposium on},
+  pages={514--523},
+  year={1996},
+  organization={IEEE}
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%   优先级搜索
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@article{wang2010secure,
+  title={Secure ranked keyword search over encrypted cloud data},
+  author={Wang, Cong and Cao, Ning and Li, Jin and Ren, Kui and Lou, Wenjing},
+  booktitle={Distributed Computing Systems (ICDCS), 2010 IEEE 30th International Conference on},
+  pages={253--262},
+  year={2010}
+}
+
+@article{wang2012enabling,
+  title={Enabling secure and efficient ranked keyword search over outsourced cloud data},
+  author={Wang, Cong and Cao, Ning and Ren, Kui and Lou, Wenjing},
+  journal={Parallel and Distributed Systems, IEEE Transactions on},
+  volume={23},
+  number={8},
+  pages={1467--1479},
+  year={2012}
+}
+
+
+@article{boldyreva2011order,
+  title={Order-preserving encryption revisited: Improved security analysis and alternative solutions},
+  author={Boldyreva, Alexandra and Chenette, Nathan and O’Neill, Adam},
+  booktitle={Advances in Cryptology--CRYPTO 2011},
+  pages={578--595},
+  year={2011}
+}
+
+@article{cao2014privacy,
+  title={Privacy-preserving multi-keyword ranked search over encrypted cloud data},
+  author={Cao, Ning and Wang, Cong and Li, Ming and Ren, Kui and Lou, Wenjing},
+  journal={Parallel and Distributed Systems, IEEE Transactions on},
+  volume={25},
+  number={1},
+  pages={222--233},
+  year={2014}
+}
+
+@book{witten1999managing,
+  title={Managing gigabytes: compressing and indexing documents and images},
+  author={Witten, Ian H and Moffat, Alistair and Bell, Timothy C},
+  year={1999}
+}
+
+@article{xu2012efficient,
+  title={Efficient Multi-Keyword Ranked Query on Encrypted Data in the Cloud.},
+  author={Xu, Zhiyong and Kang, Wansheng and Li, Ruixuan and Yow, KinChoong and Xu, Cheng-Zhong},
+  booktitle={ICPADS},
+  pages={244--251},
+  year={2012}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%
+%%      chapter 02
+%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@article{bellare1993random,
+  title={Random oracles are practical: A paradigm for designing efficient protocols},
+  author={Bellare, Mihir and Rogaway, Phillip},
+  booktitle={Proceedings of the 1st ACM conference on Computer and communications security},
+  pages={62--73},
+  year={1993}
+}
+
+@article{goh2003secure,
+  title={Secure Indexes.},
+  author={Goh, Eu-Jin and others},
+  journal={IACR Cryptology ePrint Archive},
+  volume={2003},
+  pages={216},
+  year={2003}
+}
+
+@article{gremillion1982designing,
+  title={Designing a Bloom filter for differential file access},
+  author={Gremillion, Lee L},
+  journal={Communications of the ACM},
+  volume={25},
+  number={9},
+  pages={600--604},
+  year={1982}
+}
+
+@article{curtmola2006searchable,
+  title={Searchable symmetric encryption: improved definitions and efficient constructions},
+  author={Curtmola, Reza and Garay, Juan and Kamara},
+  booktitle={Proceedings of the 13th ACM conference on Computer and communications security},
+  pages={79--88},
+  year={2006},
+}
+
+@article{chang2005privacy,
+  title={Privacy preserving keyword searches on remote encrypted data},
+  author={Chang, Yan-Cheng and Mitzenmacher, Michael},
+  booktitle={Applied Cryptography and Network Security},
+  pages={442--455},
+  year={2005}
+}
+
+@article{jin2012reducing,
+  title={Reducing extra storage in searchable symmetric encryption scheme},
+  author={Jin, Chongying and Gu, Dawu and Tang, Yinqi and Lu, Haining},
+  booktitle={Proceedings of the 2012 IEEE 4th International Conference on Cloud Computing Technology and Science (CloudCom)},
+  pages={255--262},
+  year={2012}
+}
+
+@article{van2010computationally,
+  title={Computationally efficient searchable symmetric encryption},
+  author={Van Liesdonk, Peter and Sedghi, Saeed and Doumen, Jeroen and Hartel, Pieter and Jonker, Willem},
+  booktitle={Secure Data Management},
+  pages={87--100},
+  year={2010}
+}
+
+@article{kamara2012dynamic,
+  title={Dynamic searchable symmetric encryption},
+  author={Kamara, Seny and Papamanthou, Charalampos and Roeder, Tom},
+  booktitle={Proceedings of the 2012 ACM conference on Computer and communications security},
+  pages={965--976},
+  year={2012}
+}
+
+@article{kamara2013parallel,
+  title={Parallel and dynamic searchable symmetric encryption},
+  author={Kamara, Seny and Papamanthou, Charalampos},
+  booktitle={Financial Cryptography and Data Security},
+  pages={258--274},
+  year={2013}
+}
+
+@article{stefanov2013practical,
+  title={Practical Dynamic Searchable Encryption with Small Leakage.},
+  author={Stefanov, Emil and Papamanthou, Charalampos and Shi, Elaine},
+  journal={IACR Cryptology ePrint Archive},
+  volume={2013},
+  pages={832},
+  year={2013}
+}
+
+@article{liu2014search,
+  title={Search pattern leakage in searchable encryption: Attacks and new construction},
+  author={Liu, Chang and Zhu, Liehuang and Wang, Mingzhong and Tan, Yu-an},
+  journal={Information Sciences},
+  volume={265},
+  pages={176--188},
+  year={2014}
+}
+
+@article{islam2012access,
+  title={Access Pattern disclosure on Searchable Encryption: Ramification, Attack and Mitigation.},
+  author={Islam, Mohammad Saiful and Kuzu, Mehmet and Kantarcioglu, Murat},
+  year={2012}
+}
+
+
+%%%%%%%%%%%%%%%%%%
+%%
+%%   33
+%%
+%%%%%%%%%%%%%%%%%%%
+@article{chai2012verifiable,
+  title={Verifiable symmetric searchable encryption for semi-honest-but-curious cloud servers},
+  author={Chai, Qi and Gong, Guang},
+  journal={Communications ICC, 2012 IEEE International Conference},
+  pages={917--922},
+  year={2012}
+}
+
+%%%%%%%%%%%%%%%%%%
+%%
+%%   34
+%%
+%%%%%%%%%%%%%%%%%%%
+@article{kurosawa2012uc,
+  title={UC-secure searchable symmetric encryption},
+  author={Kurosawa, Kaoru and Ohtaki, Yasuhiro},
+  journal={Financial Cryptography and Data Security},
+  pages={285--298},
+  year={2012}
+}
+
+%%%%%%%%%%%%%%%%%%
+%%
+%%   35
+%%
+%%%%%%%%%%%%%%%%%%%
+@article{chase2010structured,
+  title={Structured encryption and controlled disclosure},
+  author={Chase, Melissa and Kamara, Seny},
+  journal={Advances in Cryptology-ASIACRYPT 2010},
+  pages={577--594},
+  year={2010}
+}
+
+%%%%%%%%%%%%%%%%%%
+%%
+%%   36
+%%
+%%%%%%%%%%%%%%%%%%%
+@article{boneh2003identity,
+  title={Identity-based encryption from the Weil pairing},
+  author={Boneh, Dan and Franklin, Matthew},
+  journal={SIAM Journal on Computing},
+  volume={32},
+  number={3},
+  pages={586--615},
+  year={2003}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%    明文模糊搜索
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@article{ji2009efficient,
+  title={Efficient interactive fuzzy keyword search},
+  author={Ji, Shengyue and Li, Guoliang and Li, Chen and Feng, Jianhua},
+  journal={Proceedings of the 18th international conference on World wide web},
+  pages={371--380},
+  year={2009}
+}
+
+@article{li2008efficient,
+  title={Efficient merging and filtering algorithms for approximate string searches},
+  author={Li, Chen and Lu, Jiaheng and Lu, Yiming},
+  journal={Data Engineering, 2008. ICDE 2008. IEEE 24th International Conference on},
+  pages={257--266},
+  year={2008}
+}
+
+@article{behm2009space,
+  title={Space-constrained gram-based indexing for efficient approximate string search},
+  author={Behm, Alexander and Ji, Shengyue and Li, Chen and Lu, Jiaheng},
+  journal={Data Engineering, 2009. ICDE'09. IEEE 25th International Conference on},
+  pages={604--615},
+  year={2009}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%    模糊可搜索加密
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@article{li2010fuzzy,
+  title={Fuzzy keyword search over encrypted data in cloud computing},
+  author={Li, Jin and Wang, Qian and Wang, Cong and Cao, Ning and Ren, Kui and Lou, Wenjing},
+  journal={INFOCOM, 2010 Proceedings IEEE},
+  pages={1--5},
+  year={2010}
+}
+
+@article{ristad1998learning,
+  title={Learning string-edit distance},
+  author={Ristad, Eric Sven and Yianilos, Peter N},
+  journal={Pattern Analysis and Machine Intelligence, IEEE Transactions on},
+  volume={20},
+  number={5},
+  pages={522--532},
+  year={1998}
+}
+
+@article{zhang2010bed,
+  title={Bed-tree: an all-purpose index structure for string similarity search based on edit distance},
+  author={Zhang, Zhenjie and Hadjieleftheriou, Marios and Ooi, Beng Chin and Srivastava, Divesh},
+  journal={Proceedings of the 2010 ACM SIGMOD International Conference on Management of data},
+  pages={915--926},
+  year={2010}
+}
+
+@article{wang2012achieving,
+  title={Achieving usable and privacy-assured similarity search over outsourced cloud data},
+  author={Wang, Cong and Ren, Kui and Yu, Shucheng and Urs, Karthik Mahendra Raje},
+  journal={INFOCOM, 2012 Proceedings IEEE},
+  pages={451--459},
+  year={2012}
+}
+
+@article{balamuralikrishna2013fuzzy,
+  title={FUZZY KEYWORD SEARCH OVER ENCRYPTED DATA IN CLOUD COMPUTING},
+  author={Balamuralikrishna, T and Anuradha, C and Raghavendrasai, N},
+  journal={ASIAN JOURNAL OF COMPUTER SCIENCE \& INFORMATION TECHNOLOGY},
+  volume={1},
+  number={3},
+  year={2013}
+}
+
+
+@article{haastad1999pseudorandom,
+  title={A pseudorandom generator from any one-way function},
+  author={H{\aa}stad, Johan and Impagliazzo, Russell and Levin, Leonid A and Luby, Michael},
+  journal={SIAM Journal on Computing},
+  volume={28},
+  number={4},
+  pages={1364--1396},
+  year={1999},
+  publisher={SIAM}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% 第三章，搜索模式信息泄漏
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@article{liu2014search,
+  title={Search pattern leakage in searchable encryption: Attacks and new construction},
+  author={Liu, Chang and Zhu, Liehuang and Wang, Mingzhong and Tan, Yu-an},
+  journal={Information Sciences},
+  volume={265},
+  pages={176--188},
+  year={2014},
+  publisher={Elsevier}
+}
+
+
+@article{daniel1976reorthogonalization,
+  title={Reorthogonalization and stable algorithms for updating the Gram-Schmidt 𝑄𝑅 factorization},
+  author={Daniel, James W and Gragg, Walter Bill and Kaufman, Linda and Stewart, GW},
+  journal={Mathematics of Computation},
+  volume={30},
+  number={136},
+  pages={772--795},
+  year={1976}
+}
+
+@article{schwarzenberger1961vector,
+  title={Vector bundles on the projective plane},
+  author={Schwarzenberger, Rolf LE},
+  journal={Proceedings of the London Mathematical Society},
+  volume={3},
+  number={1},
+  pages={623--640},
+  year={1961},
+  publisher={Oxford University Press}
+}

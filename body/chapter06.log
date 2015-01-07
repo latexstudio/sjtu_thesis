@@ -1,0 +1,26 @@
+This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2014.12.8)  15 DEC 2014 19:17
+entering extended mode
+**chapter06.tex
+(C:\Users\liuzp\Desktop\毕业相关\liuzp-毕业论文\liuzp-sjtu\body\chapter
+06.tex
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for loaded.
+! Undefined control sequence.
+l.6 \chapter
+            {总结与展望}
+? 
+! Emergency stop.
+l.6 \chapter
+            {总结与展望}
+End of file on the terminal!
+
+ 
+Here is how much of TeX's memory you used:
+ 5 strings out of 430478
+ 112 string characters out of 3191502
+ 44928 words of memory out of 3000000
+ 3235 multiletter control sequences out of 15000+200000
+ 3640 words of font info for 14 fonts, out of 3000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 5i,0n,1p,68b,8s stack positions out of 5000i,500n,10000p,200000b,50000s
+No pages of output.

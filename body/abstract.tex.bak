@@ -1,0 +1,60 @@
+%%==================================================
+%% abstract.tex for SJTU Master Thesis
+%% based on CASthesis
+%% modified by wei.jianwen@gmail.com
+%% version: 0.3a
+%% Encoding: UTF-8
+%% last update: Dec 5th, 2010
+%%==================================================
+
+\begin{abstract}
+
+  在大数据时代，越来越多的用户开始使用廉价的和计算能力强大的云外包服务。然而安全因素成为了它进一步发展的主要障碍，导致该问题的原因在于：云外包商并非完全可信，致使远程外包的数据处在危险之中。一个简单的解决方案是在数据外包之前对数据加密。但是，加密限制了对用户对数据的有效检索。为此，如何避免云端数据被未经授权的人所访问并维持对加密数据的有效计算，已成为云计算外包领域的研究重点。
+
+  基于安全索引的可搜索加密技术解决了该难题。可搜索加密技术主要包括：对称可搜索加密技术、公钥可搜索加密技术和隐私信息检索，它们分别解决了不同场景下的应用难题。本文仅仅关注云计算环境下的对称可搜索加密技术。其主要研究内容是对称云环境下的隐私泄漏问题和复杂条件搜索的情形。
+
+  为了弥补搜索阶段外包数据信息泄漏的缺陷，我们基于史密斯正交化理论提出了一个以概率抗trace泄漏的方案。与以往的单关键字可搜索方案相比，我们的方案降低了trace信息泄漏的概率，并且没有增加客户端的计算与存储开销和双方交互的通讯开销，同时达到了同等的安全。不幸的是，方案提高了服务器的存储和计算开销。通过在安全和性能之间权衡，我们证明这个代价是可取的，并且使方案获得了良好的可扩展性。
+
+  另外，到目前为止，没有一个方案对复杂条件搜索下的同义词搜索问题进行研究。在用户记忆的有限性和易忘的特征的场景下，以前的方案显得有些难以应付，于是我们认真地研究了该问题。紧接着，我们设计了一个支持同义词搜索的方案。该方案有如下优势：类比于模糊搜索，我们第一次阐述了同义词可搜索问题；为使方案有更好的可扩展性，我们引入了同义词函数和同义词集合；并且通过严格的安全分析，证明我们提出的方案是正确的和non-adaptive安全的。此外，我们提出的算法是高效的，它没有增加用户的计算和存储开销，传输开销仍为$O(1)$，查找时间复杂度仅为$O(p)$（$p$ --- 单词同义词集合的最大长度）。通过返回所有同义词文档集合，该方案大大克服了已存在方案的不足，提高了系统的可适用性。因而，我们提出的方案是非常实用的并且弥补了理论与现实的差距。
+
+
+
+
+
+  %%对称可搜索加密技术允许用户外包加密的数据至不可信的云服务提供商，并维持用关键字进行有效检索的能力。
+%%
+%%  随着云计算的飞速发展，越来越多的用户将敏感数据集中存放到云服务端，以避免繁琐的本地管理并获取更多便捷的服务。与此同时由于云服务提供商并非完全可信，如何保证云端数据的隐私--- 即如何避免云端数据被未经授权的人所访问已成为云计算环境下安全隐私问题的研究重点。为此，一项新的研究技术 --- " 云计算环境下的可搜索加密技术" 解决了此难题。 一些学者率先提出了“云计算环境下的可搜索加密技术”的研究课题。可搜索对称加密技术即用户将数据加密存储到服务端，同时服务端维持对加密数据进行有效检索的能力。
+%%
+%%  本课题研究重点是：对称可搜索加密技术（可搜索加密技术主要包括：对称可搜索加密技术、公钥可搜索加密技术和隐私信息检索）中模糊对称可搜索加密和动态可搜索加密技术。文中首先分析了现有方案的研究状况；然后找出现有方案中存在的不足和被忽略的问题；最后通过解决原有方案中存在的潜在问题和扩充原有模糊方案的功能—支持语义搜索，提出一种更实用、更高效、功能更强大并且没有降低安全性能的新方案，使之尽可能支持动态和模糊功能并且没有增加信息泄露。
+
+
+  \keywords{\large 可搜索加密 \quad 同义词搜索 \quad 信息泄漏 \quad 搜索模式 \quad 搜索模式 }
+\end{abstract}
+
+\begin{englishabstract}
+
+
+  In an era of mass data, more and more users start to utilize cloud outsourcing services of cheap and powerful computing ability. While security problem has become a main obstacle to its further moveforward. The fact that the cloud server provider is "honest-but-curious" might make outsourced data at risk. A naive method is that these data have to be encrypted prior to outsource to the remote semi-trusted servers to combating unsolicited accesses. But unfortunately, encrypted data restricts the users' effective search ability. Therefore, this point that how to avoid accessing the outsourced data by unauthorized users while maintaining effective computing on encrypted data has been closely researched in the field of cloud outsourcing.
+
+  The searchable encryption technique based on secure index, which has been a key and lead solution, solves this issue. It mainly consists of symmetric searchable encryption (SSE), public-key searchable encryption (PKSE) and private information retrieval (PIR). And they, respectively, work out the problem of application under different scenarios. In this thesis, we only focus on SSE technique in the context of cloud computing.The dissertation concerns about researching on problems of data privacy leakage and complexity search on encrypted data in untrusted cloud setting.
+
+  In order to make up the defects of outsourcing data information leakage in the phrase of query, we based on the smith orthogonalization theory present a scheme of resisting leakage of trace in probability. Compared with the previous single keyword search works, not only does our solution leak less information, but also it doesn't increase the computing and storage overheads of clients and communication cost in the interactive process. It is unfortunate that this scheme greatly improves the storage and computational overhead of servers. At last, by balancing trade-off between security and capability, we show that this cost is advisable and enhances its extensibility and usability in practice.
+
+  In addition, there exists no such solution focusing on the synonym search in the setting of complexity search. In consideration of finiteness of people's memory and lifetime of people's knowledge, existing schemes seem to be difficult to deal with this case, we seriously study this issue. Soon afterwards, we firstly design a formal Practical Synonym Symmetric Searchable Encryption Solution (PSSSE) in this thesis. Our proposed technique have a number of crucial advantages. To our best knowledge, we for the first time put forward the problem of the synonym keyword search over remotely encrypted data in the context of cloud computing. In this scheme, we introduce the concepts of synonym function and synonym sets to obtain better scalability. Through rigorous security analysis, we show that our proposed solution is correct and privacy-preserving (non-adaptive security) without the loss of function of the scheme. Besides, the algorithms we present are simple and effective, it almost increases no space and computing overhead of the user. The overhead of communication still remains $O(1)$. The time complexity of searching on encryption data is $O(p)$ (p --- the maximum number of synonym of keyword).  This scheme greatly enhances system usability by responding all documents containing keyword and corresponding synonyms. Hence, our solution is very significant to practical use and bridges the gap of state-of-art.
+ %% In addition, there exists no such solution focusing on the synonym search in the setting of complexity search. In consideration of finiteness of people's memory and lifetime of people's knowledge, we seriously study this issue. In this paper, we design a scheme for the problem of synonym search, and provide the proof of security. Our proposed technique have a number of crucial advantages. We for the first time put forward the problem of the synonym keyword search over remotely encrypted data in the context of cloud computing. In our scheme, we introduce the concepts of synonym function and synonym sets. We firstly implement a formal practical Synonym Symmetric Searchable Encryption Solution (PSSSE). Through rigorous security analysis, we show that our proposed solution is correct and privacy-preserving (non-adaptive security) without the loss of function of the scheme. Besides, the algorithms we present are simple and effective, it almost increases no space and computing overhead of the user. The overhead of communication still remains $O(1)$. The time complexity of searching on encryption data is $O(p)$ (p --- the maximum number of synonym of keyword). To apply to general situation, we simultaneously give a practical trade-off between availability and performance. This scheme greatly enhances system usability by responding the answers that are all documents containing keyword and corresponding synonyms. Hence, our solution is very significative to practical use and bridges the gap of state-of-art.
+
+%%An imperial edict issued in 1896 by Emperor Guangxu, established Nanyang Public School in Shanghai. The normal school, school of foreign studies, middle school and a high school were established. Sheng Xuanhuai, the person responsible for proposing the idea to the emperor, became the first president and is regarded as the founder of the university.
+%%
+%%During the 1930s, the university gained a reputation of nurturing top engineers. After the foundation of People's Republic, some faculties were transferred to other universities. A significant amount of its faculty were sent in 1956, by the national government, to Xi'an to help build up Xi'an Jiao Tong University in western China. Afterwards, the school was officially renamed Shanghai Jiao Tong University.
+%%
+%%Since the reform and opening up policy in China, SJTU has taken the lead in management reform of institutions for higher education, regaining its vigor and vitality with an unprecedented momentum of growth. SJTU includes five beautiful campuses, Xuhui, Minhang, Luwan Qibao, and Fahua, taking up an area of about 3,225,833 m2. A number of disciplines have been advancing towards the top echelon internationally, and a batch of burgeoning branches of learning have taken an important position domestically.
+%%
+%%Today SJTU has 31 schools (departments), 63 undergraduate programs, 250 masters-degree programs, 203 Ph.D. programs, 28 post-doctorate programs, and 11 state key laboratories and national engineering research centers.
+%%
+%%SJTU boasts a large number of famous scientists and professors, including 35 academics of the Academy of Sciences and Academy of Engineering, 95 accredited professors and chair professors of the "Cheung Kong Scholars Program" and more than 2,000 professors and associate professors.
+%%
+%%Its total enrollment of students amounts to 35,929, of which 1,564 are international students. There are 16,802 undergraduates, and 17,563 masters and Ph.D. candidates. After more than a century of operation, Jiao Tong University has inherited the old tradition of "high starting points, solid foundation, strict requirements and extensive practice." Students from SJTU have won top prizes in various competitions, including ACM International Collegiate Programming Contest, International Mathematical Contest in Modeling and Electronics Design Contests. Famous alumni include Jiang Zemin, Lu Dingyi, Ding Guangen, Wang Daohan, Qian Xuesen, Wu Wenjun, Zou Taofen, Mao Yisheng, Cai Er, Huang Yanpei, Shao Lizi, Wang An and many more. More than 200 of the academics of the Chinese Academy of Sciences and Chinese Academy of Engineering are alumni of Jiao Tong University.
+%%
+
+  \englishkeywords{\large searchable encryption, synonym search, information leakage, search pattern, access pattern}
+\end{englishabstract}

@@ -1,0 +1,17 @@
+\chapter{算法分析}
+\label{chap:analysis}
+
+
+\section{系统模型}
+\label{sec:searchpatttern_model}
+
+\section{算法框架}
+\label{sec:searchpatttern_algo}
+
+
+\section{方案细节}
+\label{sec:searchpatttern_scheme}
+
+
+\section{安全性证明}
+\label{sec:searchpatttern_security}

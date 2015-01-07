@@ -1,0 +1,15 @@
+% DO NOT DELETE This File!!!
+
+% encoding: GBK
+
+% !Mode:: "TeX:UTF-8"
+
+
+@article{goh2003secure,
+  title={Secure Indexes.},
+  author={Goh, Eu-Jin and others},
+  journal={IACR Cryptology ePrint Archive},
+  volume={2003},
+  pages={216},
+  year={2003}
+}
